@@ -3,6 +3,8 @@
 #include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Camera.h"
+#include "Cube.h"
 
 class Engine {
 public:
@@ -18,7 +20,13 @@ private:
     std::string title;
     GLFWwindow* window;
 
-    void ProcessInput();
+    Camera* camera;
+    Cube* cube;
+
+    double lastX, lastY;
+    bool firstMouse;
+
+    void ProcessInput(float deltaTime);
     void Update(float deltaTime);
     void Render();
 };

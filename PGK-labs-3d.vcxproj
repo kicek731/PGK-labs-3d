@@ -122,6 +122,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d "$(ProjectDir)shaders\*.*" "$(OutDir)shaders\"
+xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -145,6 +146,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d "$(ProjectDir)shaders\*.*" "$(OutDir)shaders\"
+xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -169,6 +171,9 @@
   <ItemGroup>
     <None Include="fragment.glsl" />
     <None Include="vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="x64\Debug\brick.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

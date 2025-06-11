@@ -2,8 +2,8 @@
 #include <glad/glad.h>
 
 Cube::Cube()
-    : shader("shaders/vertex.glsl", "shaders/fragment.glsl"),
-    texture("assets/textures/brick.jpg") {
+    : shader("vertex.glsl", "fragment.glsl"),
+    texture("brick.jpg") {
     SetupMesh();
 }
 
