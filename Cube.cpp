@@ -8,8 +8,8 @@ Cube::Cube()
 }
 
 Cube::~Cube() {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    if (VAO != 0) glDeleteVertexArrays(1, &VAO);
+    if (VBO != 0) glDeleteBuffers(1, &VBO);
 }
 
 void Cube::SetupMesh() {
@@ -79,14 +79,20 @@ void Cube::SetupMesh() {
     glEnableVertexAttribArray(1);
 }
 
-void Cube::Draw(const glm::mat4& view, const glm::mat4& projection) {
+void Cube::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& viewPos, bool lightingEnabled) {
     shader.Use();
     shader.SetMat4("model", GetModelMatrix());
     shader.SetMat4("view", view);
     shader.SetMat4("projection", projection);
 
-    texture.Bind();
+    shader.SetVec3("viewPos", viewPos);
+    shader.SetBool("lightingEnabled", lightingEnabled);
+    if (lightingEnabled) {
+        shader.SetVec3("lightDir", glm::vec3(-0.2f, -1.0f, -0.3f));
+        shader.SetVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+    }
 
+    texture.Bind();
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 36);  // 6 œcian × 2 trójk¹ty × 3 wierzcho³ki
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 }

@@ -3,7 +3,8 @@
 
 Engine::Engine(int width, int height, const std::string& title)
     : width(width), height(height), title(title), window(nullptr),
-    camera(nullptr), cube(nullptr), lastX(width / 2.0), lastY(height / 2.0), firstMouse(true) {
+    camera(nullptr), cube(nullptr), lastX(width / 2.0), lastY(height / 2.0), firstMouse(true),
+    lightingEnabled(true) {
 }
 
 Engine::~Engine() {
@@ -85,10 +86,20 @@ void Engine::ProcessInput(float deltaTime) {
     lastY = ypos;
 
     camera->ProcessMouse(offsetX, offsetY);
+
+    // obs³uga klawisza L do prze³¹czania œwiat³a
+    static bool lPressedLastFrame = false;
+    bool lPressedNow = glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS;
+
+    if (lPressedNow && !lPressedLastFrame) {
+        lightingEnabled = !lightingEnabled;
+        std::cout << "Lighting " << (lightingEnabled ? "enabled" : "disabled") << std::endl;
+    }
+    lPressedLastFrame = lPressedNow;
 }
 
 void Engine::Update(float deltaTime) {
-    // Mo¿na dodaæ logikê animacji
+    // logika gry
 }
 
 void Engine::Render() {
@@ -98,7 +109,7 @@ void Engine::Render() {
     glm::mat4 view = camera->GetViewMatrix();
     glm::mat4 projection = camera->GetProjectionMatrix();
 
-    cube->Draw(view, projection);
+    cube->Draw(view, projection, camera->GetPosition(), lightingEnabled);
 }
 
 void Engine::Cleanup() {

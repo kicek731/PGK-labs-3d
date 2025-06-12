@@ -61,11 +61,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\textures\brick.jpg">
+    <Image Include="x64\Debug\assets\textures\brick.jpg">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="x64\Debug\brick.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Debug\fragment.glsl" />
+    <None Include="x64\Debug\vertex.glsl" />
   </ItemGroup>
 </Project>

@@ -26,6 +26,8 @@ private:
     double lastX, lastY;
     bool firstMouse;
 
+    bool lightingEnabled;
+
     void ProcessInput(float deltaTime);
     void Update(float deltaTime);
     void Render();

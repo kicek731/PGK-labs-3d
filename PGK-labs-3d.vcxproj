@@ -169,8 +169,11 @@ if exist "$(ProjectDir)assets" xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\textures\brick.jpg" />
-    <Image Include="x64\Debug\brick.jpg" />
+    <Image Include="x64\Debug\assets\textures\brick.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Debug\fragment.glsl" />
+    <None Include="x64\Debug\vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

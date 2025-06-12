@@ -1,15 +1,32 @@
 #version 330 core
 
-layout(location = 0) in vec3 aPos;
-layout(location = 1) in vec2 aTexCoord;
+in vec2 TexCoord;
+in vec3 FragPos;
+in vec3 Normal;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+out vec4 FragColor;
 
-out vec2 TexCoord;
+uniform sampler2D texture1;
+uniform vec3 lightDir;
+uniform vec3 lightColor;
+uniform vec3 viewPos;
+uniform bool lightingEnabled;
 
 void main() {
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
-    TexCoord = aTexCoord;
+    vec3 texColor = texture(texture1, TexCoord).rgb;
+
+    if (!lightingEnabled) {
+        FragColor = vec4(texColor, 1.0);
+        return;
+    }
+
+    vec3 norm = normalize(Normal);
+    vec3 light = normalize(-lightDir);
+
+    vec3 ambient = 0.1 * lightColor;
+    float diff = max(dot(norm, light), 0.0);
+    vec3 diffuse = diff * lightColor;
+
+    vec3 lighting = (ambient + diffuse) * texColor;
+    FragColor = vec4(lighting, 1.0);
 }
