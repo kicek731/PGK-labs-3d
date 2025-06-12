@@ -121,8 +121,8 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(ProjectDir)shaders\*.*" "$(OutDir)shaders\"
-xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
+      <Command>if exist "$(ProjectDir)shaders" xcopy /y /d "$(ProjectDir)shaders\*.*" "$(OutDir)shaders\"
+if exist "$(ProjectDir)assets" xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -145,8 +145,8 @@ xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(ProjectDir)shaders\*.*" "$(OutDir)shaders\"
-xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
+      <Command>if exist "$(ProjectDir)shaders" xcopy /y /d "$(ProjectDir)shaders\*.*" "$(OutDir)shaders\"
+if exist "$(ProjectDir)assets" xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -169,10 +169,7 @@ xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)assets\"
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment.glsl" />
-    <None Include="vertex.glsl" />
-  </ItemGroup>
-  <ItemGroup>
+    <Image Include="assets\textures\brick.jpg" />
     <Image Include="x64\Debug\brick.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

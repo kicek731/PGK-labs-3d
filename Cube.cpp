@@ -3,7 +3,7 @@
 
 Cube::Cube()
     : shader("vertex.glsl", "fragment.glsl"),
-    texture("brick.jpg") {
+    texture("assets/textures/brick.jpg") {
     SetupMesh();
 }
 

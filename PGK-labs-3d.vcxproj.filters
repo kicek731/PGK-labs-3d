@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{b507a97a-8073-4105-8607-7e93f2ef9f94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="assets">
-      <UniqueIdentifier>{c728d622-33f7-49d5-b910-fc00a94f22b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="assets\textures">
-      <UniqueIdentifier>{e7d755fd-d008-4e54-bf68-67b33c4b6b69}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -70,16 +61,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="fragment.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
+    <Image Include="assets\textures\brick.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="x64\Debug\brick.jpg">
-      <Filter>assets\textures</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
 </Project>
