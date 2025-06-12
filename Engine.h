@@ -27,6 +27,7 @@ private:
     bool firstMouse;
 
     bool lightingEnabled;
+    bool shadingEnabled;
 
     void ProcessInput(float deltaTime);
     void Update(float deltaTime);

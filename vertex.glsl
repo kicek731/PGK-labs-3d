@@ -15,7 +15,7 @@ void main() {
     vec4 worldPosition = model * vec4(aPos, 1.0);
     FragPos = worldPosition.xyz;
 
-    // Sztuczna normalna w kierunku Z (do testów)
+    // Uproszczona normalna do testów (domyœlnie w kierunku Z)
     Normal = mat3(transpose(inverse(model))) * vec3(0.0, 0.0, 1.0);
 
     TexCoord = aTexCoord;

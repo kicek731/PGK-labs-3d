@@ -3,8 +3,8 @@
 
 Engine::Engine(int width, int height, const std::string& title)
     : width(width), height(height), title(title), window(nullptr),
-    camera(nullptr), cube(nullptr), lastX(width / 2.0), lastY(height / 2.0), firstMouse(true),
-    lightingEnabled(true) {
+    camera(nullptr), cube(nullptr), lastX(width / 2.0), lastY(height / 2.0),
+    firstMouse(true), lightingEnabled(true), shadingEnabled(true) {
 }
 
 Engine::~Engine() {
@@ -80,26 +80,34 @@ void Engine::ProcessInput(float deltaTime) {
     }
 
     float offsetX = static_cast<float>(xpos - lastX);
-    float offsetY = static_cast<float>(lastY - ypos); // odwrotnie, bo góra to y+
+    float offsetY = static_cast<float>(lastY - ypos);
 
     lastX = xpos;
     lastY = ypos;
 
     camera->ProcessMouse(offsetX, offsetY);
 
-    // obs³uga klawisza L do prze³¹czania œwiat³a
+    // Lighting toggle (L)
     static bool lPressedLastFrame = false;
     bool lPressedNow = glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS;
-
     if (lPressedNow && !lPressedLastFrame) {
         lightingEnabled = !lightingEnabled;
         std::cout << "Lighting " << (lightingEnabled ? "enabled" : "disabled") << std::endl;
     }
     lPressedLastFrame = lPressedNow;
+
+    // Shading toggle (K)
+    static bool kPressedLastFrame = false;
+    bool kPressedNow = glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS;
+    if (kPressedNow && !kPressedLastFrame) {
+        shadingEnabled = !shadingEnabled;
+        std::cout << "Shading " << (shadingEnabled ? "smooth" : "flat") << std::endl;
+    }
+    kPressedLastFrame = kPressedNow;
 }
 
 void Engine::Update(float deltaTime) {
-    // logika gry
+    // opcjonalna logika gry
 }
 
 void Engine::Render() {
@@ -109,7 +117,7 @@ void Engine::Render() {
     glm::mat4 view = camera->GetViewMatrix();
     glm::mat4 projection = camera->GetProjectionMatrix();
 
-    cube->Draw(view, projection, camera->GetPosition(), lightingEnabled);
+    cube->Draw(view, projection, camera->GetPosition(), lightingEnabled, shadingEnabled);
 }
 
 void Engine::Cleanup() {

@@ -15,7 +15,11 @@ public:
     glm::vec3 GetPosition() const;
 
     virtual void Update(float deltaTime) {}
-    virtual void Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& viewPos, bool lightingEnabled) = 0;
+    virtual void Draw(const glm::mat4& view,
+        const glm::mat4& projection,
+        const glm::vec3& viewPos,
+        bool lightingEnabled,
+        bool shadingEnabled) = 0;
 
 protected:
     glm::vec3 position;

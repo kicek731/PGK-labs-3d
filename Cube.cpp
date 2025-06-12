@@ -79,7 +79,8 @@ void Cube::SetupMesh() {
     glEnableVertexAttribArray(1);
 }
 
-void Cube::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& viewPos, bool lightingEnabled) {
+void Cube::Draw(const glm::mat4& view, const glm::mat4& projection,
+    const glm::vec3& viewPos, bool lightingEnabled, bool shadingEnabled) {
     shader.Use();
     shader.SetMat4("model", GetModelMatrix());
     shader.SetMat4("view", view);
@@ -87,9 +88,11 @@ void Cube::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::v
 
     shader.SetVec3("viewPos", viewPos);
     shader.SetBool("lightingEnabled", lightingEnabled);
+    shader.SetBool("shadingEnabled", shadingEnabled);
+
     if (lightingEnabled) {
         shader.SetVec3("lightDir", glm::vec3(-0.2f, -1.0f, -0.3f));
-        shader.SetVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+        shader.SetVec3("lightColor", glm::vec3(1.0f));
     }
 
     texture.Bind();

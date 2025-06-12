@@ -9,7 +9,11 @@ public:
     Cube();
     ~Cube();
 
-    void Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& viewPos, bool lightingEnabled) override;
+    void Draw(const glm::mat4& view,
+        const glm::mat4& projection,
+        const glm::vec3& viewPos,
+        bool lightingEnabled,
+        bool shadingEnabled) override;
 
 private:
     unsigned int VAO, VBO;
