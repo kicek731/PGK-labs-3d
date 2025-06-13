@@ -1,24 +1,23 @@
 #version 330 core
 
 layout(location = 0) in vec3 aPos;
-layout(location = 1) in vec2 aTexCoord;
 layout(location = 2) in vec3 aNormal;
+layout(location = 1) in vec2 aTexCoord;
 
-out vec2 TexCoord;
+flat out vec3 NormalFlat;
+out vec3 NormalSmooth;
 out vec3 FragPos;
-out vec3 Normal;
+out vec2 TexCoord;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
 void main() {
-    vec4 worldPosition = model * vec4(aPos, 1.0);
-    FragPos = worldPosition.xyz;
-
-    // Przekszta³cenie normalnych do przestrzeni œwiata
-    Normal = mat3(transpose(inverse(model))) * aNormal;
-
+    vec3 worldNormal = mat3(transpose(inverse(model))) * aNormal;
+    NormalFlat = worldNormal;
+    NormalSmooth = worldNormal;
+    FragPos = vec3(model * vec4(aPos, 1.0));
     TexCoord = aTexCoord;
-    gl_Position = projection * view * worldPosition;
+    gl_Position = projection * view * vec4(FragPos, 1.0);
 }
