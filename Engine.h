@@ -25,6 +25,10 @@ private:
 
     double lastX, lastY;
     bool firstMouse;
+    bool rightMousePressed = false;
+
+    float modelYaw = 0.0f;
+    float modelPitch = 0.0f;
 
     bool lightingEnabled;
     bool shadingEnabled;

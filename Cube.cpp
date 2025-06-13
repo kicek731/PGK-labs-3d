@@ -45,7 +45,6 @@ void Cube::SetupMesh() {
 
 void Cube::Draw(const glm::mat4& view, const glm::mat4& projection,
     const glm::vec3& viewPos, bool lightingEnabled, bool shadingEnabled) {
-
     shader.Use();
     shader.SetMat4("model", GetModelMatrix());
     shader.SetMat4("view", view);

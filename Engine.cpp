@@ -4,7 +4,8 @@
 Engine::Engine(int width, int height, const std::string& title)
     : width(width), height(height), title(title), window(nullptr),
     camera(nullptr), cube(nullptr), lastX(width / 2.0), lastY(height / 2.0),
-    firstMouse(true), lightingEnabled(true), shadingEnabled(true) {
+    firstMouse(true), lightingEnabled(true), shadingEnabled(true),
+    rightMousePressed(false), modelYaw(0.0f), modelPitch(0.0f) {
 }
 
 Engine::~Engine() {
@@ -71,6 +72,8 @@ void Engine::ProcessInput(float deltaTime) {
     bool right = glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS;
     camera->ProcessKeyboard(deltaTime, forward, backward, left, right);
 
+    bool rightPressedNow = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS;
+
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
     if (firstMouse) {
@@ -85,7 +88,15 @@ void Engine::ProcessInput(float deltaTime) {
     lastX = xpos;
     lastY = ypos;
 
-    camera->ProcessMouse(offsetX, offsetY);
+    if (rightPressedNow) {
+        modelYaw += offsetX * 0.3f;
+        modelPitch += offsetY * 0.3f;
+    }
+    else {
+        camera->ProcessMouse(offsetX, offsetY);
+    }
+
+    rightMousePressed = rightPressedNow;
 
     // Lighting toggle (L)
     static bool lPressedLastFrame = false;
@@ -107,11 +118,11 @@ void Engine::ProcessInput(float deltaTime) {
 }
 
 void Engine::Update(float deltaTime) {
-    // opcjonalna logika gry
+    cube->SetRotation(glm::vec3(modelPitch, modelYaw, 0.0f));
 }
 
 void Engine::Render() {
-    glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
+    glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glm::mat4 view = camera->GetViewMatrix();
