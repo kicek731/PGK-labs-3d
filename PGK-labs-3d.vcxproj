@@ -84,10 +84,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\isiek\source\repos\pqkproject\external\stb;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\stb_imagine;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\GML\glm;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glew-2.1.0\include;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glfw-3.4.bin.WIN32\include;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glad\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glm;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\stb_imagine;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glfw-3.4.bin.WIN32\lib-vc2022;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glew-2.1.0\lib\Release\Win32;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,13 +115,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Visual Studio Community Projects\PGK-labs-3d\external\glm;D:\Visual Studio Community Projects\PGK-labs-3d\external\glad\include;D:\Visual Studio Community Libraries\GLFW\glfw-3.4.bin.WIN64\include;D:\Visual Studio Community Projects\PGK-labs-3d\external\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\isiek\source\repos\pqkproject\external\stb;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\stb_imagine;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\GML\glm;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glew-2.1.0\include;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glfw-3.4.bin.WIN32\include;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glad\include;D:\Visual Studio Community Projects\PGK-labs-3d\external\glm;D:\Visual Studio Community Projects\PGK-labs-3d\external\glad\include;D:\Visual Studio Community Libraries\GLFW\glfw-3.4.bin.WIN64\include;D:\Visual Studio Community Projects\PGK-labs-3d\external\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Visual Studio Community Libraries\GLFW\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glm;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\stb_imagine;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glfw-3.4.bin.WIN32\lib-vc2022;C:\Users\isiek\OneDrive\Pulpit\biblioteki\openGL\glew-2.1.0\lib\Release\Win32;D:\Visual Studio Community Libraries\GLFW\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if exist "$(ProjectDir)shaders" xcopy /y /d "$(ProjectDir)shaders\*.*" "$(OutDir)shaders\"
@@ -157,6 +160,7 @@ if exist "$(ProjectDir)assets" xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)
     <ClCompile Include="external\glad\src\glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="SecCube.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
@@ -165,6 +169,7 @@ if exist "$(ProjectDir)assets" xcopy /y /d /s "$(ProjectDir)assets\*" "$(OutDir)
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="SecCube.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>

@@ -115,10 +115,61 @@ void Engine::ProcessInput(float deltaTime) {
         std::cout << "Shading " << (shadingEnabled ? "smooth" : "flat") << std::endl;
     }
     kPressedLastFrame = kPressedNow;
+
+
+    // press ( 9 ) to scale up cube
+    if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) {
+        cubeScale += glm::vec3(1.0f * deltaTime);  
+        if (cubeScale.x > 5.0f) cubeScale = glm::vec3(5.0f); 
+    }
+
+    // press ( 0 ) to scale down cube
+    if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
+        cubeScale -= glm::vec3(1.0f * deltaTime); 
+        if (cubeScale.x < 0.1f) cubeScale = glm::vec3(0.1f); 
+    }
+
+
+    // press ( I ) to change ftom cubte to inrregular
+    static bool iPressedLastFrame = false;
+    bool iPressedNow = glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS;
+    if (iPressedNow && !iPressedLastFrame) {
+        drawIrregular = !drawIrregular;
+        cube->SetDrawIrregular(drawIrregular);
+
+
+        drawConcaveDisk = false;
+        cube->SetDrawConcaveDisk(false);
+
+        std::cout << "Draw irregular mesh: " << (drawIrregular ? "ON" : "OFF") << std::endl;
+    }
+    iPressedLastFrame = iPressedNow;
+
+
+    static bool oPressedLastFrame = false;
+    bool oPressedNow = glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS;
+    if (oPressedNow && !oPressedLastFrame) {
+        drawConcaveDisk = !drawConcaveDisk;
+        cube->SetDrawConcaveDisk(drawConcaveDisk);
+
+        if (drawConcaveDisk) {
+            drawIrregular = false;
+            cube->SetDrawIrregular(false);
+        }
+
+        std::cout << "Draw concave disk: " << (drawConcaveDisk ? "ON" : "OFF") << std::endl;
+    }
+    oPressedLastFrame = oPressedNow;
+
 }
 
 void Engine::Update(float deltaTime) {
     cube->SetRotation(glm::vec3(modelPitch, modelYaw, 0.0f));
+
+    cube->SetScale(cubeScale);
+
+    cube->Draw(camera->GetViewMatrix(), camera->GetProjectionMatrix(), camera->GetPosition(), lightingEnabled, shadingEnabled);
+  
 }
 
 void Engine::Render() {
@@ -129,6 +180,10 @@ void Engine::Render() {
     glm::mat4 projection = camera->GetProjectionMatrix();
 
     cube->Draw(view, projection, camera->GetPosition(), lightingEnabled, shadingEnabled);
+
+
+    
+
 }
 
 void Engine::Cleanup() {
@@ -137,3 +192,6 @@ void Engine::Cleanup() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }
+
+
+
